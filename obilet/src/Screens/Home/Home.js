@@ -223,7 +223,7 @@ const Home = ({navigation}) => {
               alignItems: 'center',
             }}
             onPress={() => setShowModal(true)}>
-            <Text style={{fontSize: 22, color: 'white'}}>Tarih Sec</Text>
+            <Text style={{fontSize: 22, color: 'white'}}>Tarih Seç</Text>
           </TouchableOpacity>
 
           
@@ -243,19 +243,19 @@ const Home = ({navigation}) => {
           <View style={styles.calendarButton}>
             <Pressable
               style={styles.today}
-              title="Bugun"
+              title="Bugün"
               onPress={() => {
-                console.log('Bugun');
+                console.log('Bugün');
               }}>
-              <Text style={{fontSize: 15, margin: 8}}>Bugun</Text>
+              <Text style={{fontSize: 15, margin: 8}}>Bugün</Text>
             </Pressable>
             <Pressable
               style={styles.tomorrow}
-              title="Yarin"
+              title="Yarın"
               onPress={() => {
-                console.log('Yarin');
+                console.log('Yarın');
               }}>
-              <Text style={{fontSize: 15, margin: 8}}>Yarin</Text>
+              <Text style={{fontSize: 15, margin: 8}}>Yarın</Text>
             </Pressable>
           </View>
         </View>
@@ -263,18 +263,17 @@ const Home = ({navigation}) => {
           <Button
             color={'#3EB489'}
             onPress={valuesFunc}
-            title="Otobus Bileti Bul"
+            title="Otobüs Bileti Bul"
           />
         </View>
         <View></View>
 
         <Text style={styles.navigationText}>
-          Kesintisiz Iade Hakki ve 0 Komisyon
+          Kesintisiz İade Hakkı ve 0 Komisyon
         </Text>
       </View>
 
-      {/* ******************* NEREDEN MODAL ******************* */}
-
+{/* ******************* NEREDEN MODAL START ******************* */}
       <Modal 
         isVisible={showNeredenModal} 
         onBackButtonPress={() => setShowNeredenModal(!showNeredenModal)}
@@ -305,9 +304,10 @@ const Home = ({navigation}) => {
           <FlatList ListHeaderComponent={enCokKullanilanDuraklar} ListFooterComponent={digerDuraklar} style={{backgroundColor:'white', flex:1}} />
         </View>
       </Modal>
+{/* ******************* NEREDEN MODAL END ******************* */}
 
-      {/* ******************* NEREYE MODAL ******************* */}
 
+{/* ******************* NEREYE MODAL START ******************* */}
       <Modal 
         isVisible={showNereyeModal} 
         onBackButtonPress={() => setShowNereyeModal(!showNereyeModal)}
@@ -337,8 +337,8 @@ const Home = ({navigation}) => {
           </View>
           <FlatList ListHeaderComponent={enCokKullanilanDuraklarNereye} ListFooterComponent={digerDuraklarNereye} style={{backgroundColor:'white', flex:1}} />
         </View>
-      </Modal>        
-
+      </Modal>
+{/* ******************* NEREYE MODAL END ******************* */}
 
 
     </View>
