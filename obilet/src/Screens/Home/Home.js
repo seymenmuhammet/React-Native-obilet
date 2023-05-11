@@ -6,7 +6,6 @@ import {
   Pressable,
   StyleSheet,
   TouchableOpacity,
-  Modal,
 } from 'react-native';
 import styles from './styles';
 import navigationStrings from '../../constants/navigationStrings';
