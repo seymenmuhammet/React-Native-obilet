@@ -1,9 +1,0 @@
-{
-    "cities": [
-        {"id":0, "value":"İstanbul"},
-        {"id":1, "value":"Bursa"},
-        {"id":2, "value":"Gaziantep"},
-        {"id":3, "value":"Hatay"},
-        {"id":4, "value":"Mersin"}
-    ]
-}
