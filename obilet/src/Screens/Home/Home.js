@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import styles from './styles';
 import navigationStrings from '../../constants/navigationStrings';
-import {SelectList} from 'react-native-dropdown-select-list';
 import {Calendar} from 'react-native-calendars';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -38,10 +37,12 @@ const Home = ({navigation}) => {
 
   
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showNeredenModal, setShowNeredenModal] = useState(false);
+  const [showNereyeModal, setShowNereyeModal] = useState(false);
+  
   const [showModal, setShowModal] = React.useState(false);
-  const [nereden, setNereden] = React.useState('');
-  const [nereye, setNereye] = React.useState('');
+  const [nereden, setNereden] = React.useState('Ankara');
+  const [nereye, setNereye] = React.useState('Bursa');
 
   const categories = [
     {id: '0', value: 'İstanbul Avrupa'},
@@ -61,7 +62,14 @@ const Home = ({navigation}) => {
 
   const renderCities = ({item}) => {
     return(
-      <TouchableOpacity style={{padding:10, borderBottomWidth:1}} onPress={() => console.log(item.value)}>
+      <TouchableOpacity style={{padding:10, borderBottomWidth:1}} onPress={() => {setNereden(item.value);setShowNeredenModal(!showNeredenModal);console.log(item.value)} } >
+        <Text style={{color:'black', fontSize:12, fontWeight:'bold'}}>{item.value}</Text>
+      </TouchableOpacity>
+    )
+  }
+  const renderCitiesNereye = ({item}) => {
+    return(
+      <TouchableOpacity style={{padding:10, borderBottomWidth:1}} onPress={() => {setNereye(item.value);setShowNereyeModal(!showNereyeModal);console.log(item.value)} } >
         <Text style={{color:'black', fontSize:12, fontWeight:'bold'}}>{item.value}</Text>
       </TouchableOpacity>
     )
@@ -84,6 +92,26 @@ const Home = ({navigation}) => {
           <Text style={{color:'black', fontSize:12}}>En Çok Kullanılan Duraklar</Text>
           </View>
       <FlatList data={cities} renderItem={renderCities} />
+      </View>
+    )
+  }
+  const digerDuraklarNereye = () => {
+    return(
+      <View>
+        <View style={{backgroundColor:'lightgray', padding:5}}>
+          <Text style={{color:'black', fontSize:12}}>Diğer Duraklar</Text>
+          </View>
+      <FlatList data={allCities["cities"]} renderItem={renderCitiesNereye} />
+      </View>
+    )
+  }
+  const enCokKullanilanDuraklarNereye = () => {
+    return(
+      <View>
+        <View style={{backgroundColor:'lightgray', padding:5}}>
+          <Text style={{color:'black', fontSize:12}}>En Çok Kullanılan Duraklar</Text>
+          </View>
+      <FlatList data={cities} renderItem={renderCitiesNereye} />
       </View>
     )
   }
@@ -158,20 +186,12 @@ const Home = ({navigation}) => {
             }}>
             NEREDEN
           </Text>
-          <TouchableOpacity style={{marginLeft:15}} onPress={() => setIsModalVisible(true) }>
-              <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>Ankara</Text>
+          <TouchableOpacity style={{marginLeft:15}} onPress={() => setShowNeredenModal(true) }>
+              <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>{nereden}</Text>
           </TouchableOpacity>
 
           <View style={{height:0.8, width:"90%",borderTopColor:"gray", borderTopWidth:1, marginHorizontal:10}} />
           
-          {/* <SelectList
-            boxStyles={{margin: 10}}
-            dropdownStyles={{margin: 10}}
-            setSelected={val => setNereden(val)}
-            data={categories}
-            placeholder={'Nereden'}
-            search={true}
-          /> */}
           <Text
             style={{
               marginStart: 15,
@@ -182,18 +202,11 @@ const Home = ({navigation}) => {
             NEREYE
           </Text>
 
-          <TouchableOpacity style={{marginLeft:15}} onPress={() => setShowModal(true)}>
-            <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>İstanbul</Text>
+          <TouchableOpacity style={{marginLeft:15}} onPress={() => setShowNereyeModal(true)}>
+            <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>{nereye}</Text>
           </TouchableOpacity>
 
-          {/* <SelectList
-            boxStyles={{margin: 10}}
-            dropdownStyles={{margin: 10}}
-            setSelected={val1 => setNereye(val1)}
-            data={categories}
-            placeholder={'Nereye'}
-            search={true}
-          /> */}
+
         </View>
         <View style={styles.card}>
           <Text
@@ -216,15 +229,16 @@ const Home = ({navigation}) => {
           
           
 {/*           
-          <Modal visible={showModal} animationType="fade">
-            <Calendar
-              style={{borderRadius: 10, elevation: 4, margin: 40}}
-              onDayPress={date => {
-                console.log(date);
-                setShowModal(false); //
-              }}
-            />
-          </Modal> */}
+      <Modal visible={showModal} animationType="fade">
+        <Calendar
+          style={{borderRadius: 10, elevation: 4, margin: 40}}
+          onDayPress={date => {
+            console.log(date);
+            setShowModal(false); //
+          }}
+        />
+      </Modal> 
+*/}
 
           <View style={styles.calendarButton}>
             <Pressable
@@ -259,10 +273,12 @@ const Home = ({navigation}) => {
         </Text>
       </View>
 
+      {/* ******************* NEREDEN MODAL ******************* */}
+
       <Modal 
-        isVisible={isModalVisible} 
-        onBackButtonPress={() => setIsModalVisible(!isModalVisible)}
-        onBackdropPress={() => setIsModalVisible(!isModalVisible)}
+        isVisible={showNeredenModal} 
+        onBackButtonPress={() => setShowNeredenModal(!showNeredenModal)}
+        onBackdropPress={() => setShowNeredenModal(!showNeredenModal)}
         statusBarTranslucent={false}
         animationType="fade"
         transparent={false}
@@ -272,7 +288,7 @@ const Home = ({navigation}) => {
         <View style={{backgroundColor:'#bb1111', flex:1}}>
           <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
             <Text style={{color:'white',fontSize:11, fontWeight:'600',marginLeft:15, marginTop:10}}>NEREDEN</Text>
-            <TouchableOpacity onPress={() => setIsModalVisible(!isModalVisible)}>
+            <TouchableOpacity onPress={() => setShowNeredenModal(!showNeredenModal)}>
               <MaterialCommunityIcons
               name="close"
               style={{color: 'white', fontSize: 26,marginTop:10, marginRight:6}}></MaterialCommunityIcons>
@@ -289,6 +305,41 @@ const Home = ({navigation}) => {
           <FlatList ListHeaderComponent={enCokKullanilanDuraklar} ListFooterComponent={digerDuraklar} style={{backgroundColor:'white', flex:1}} />
         </View>
       </Modal>
+
+      {/* ******************* NEREYE MODAL ******************* */}
+
+      <Modal 
+        isVisible={showNereyeModal} 
+        onBackButtonPress={() => setShowNereyeModal(!showNereyeModal)}
+        onBackdropPress={() => setShowNereyeModal(!showNereyeModal)}
+        statusBarTranslucent={false}
+        animationType="fade"
+        transparent={false}
+        style={{width:"100%", height:"100%", backgroundColor:'green', margin:0, justifyContent:'flex-start'}}
+
+      >
+        <View style={{backgroundColor:'#bb1111', flex:1}}>
+          <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <Text style={{color:'white',fontSize:11, fontWeight:'600',marginLeft:15, marginTop:10}}>NEREYE</Text>
+            <TouchableOpacity onPress={() => setShowNereyeModal(!showNereyeModal)}>
+              <MaterialCommunityIcons
+              name="close"
+              style={{color: 'white', fontSize: 26,marginTop:10, marginRight:6}}></MaterialCommunityIcons>
+              </TouchableOpacity> 
+            </View>
+          <View style={{backgroundColor:'white',flexDirection:'row',justifyContent:'space-between',alignItems:'center', margin:15, padding:0,borderRadius:4}}>
+
+          <TextInput placeholder='İl veya ilçe adı yazın' style={{flex:1,borderRadius:5, padding:5, paddingLeft:15}} />
+          <MaterialCommunityIcons
+              name="magnify"
+              style={{color: 'gray', fontSize: 21, marginTop:3, marginRight:6}}></MaterialCommunityIcons>
+
+          </View>
+          <FlatList ListHeaderComponent={enCokKullanilanDuraklarNereye} ListFooterComponent={digerDuraklarNereye} style={{backgroundColor:'white', flex:1}} />
+        </View>
+      </Modal>        
+
+
 
     </View>
   );
