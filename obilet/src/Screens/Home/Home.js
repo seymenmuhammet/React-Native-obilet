@@ -6,7 +6,9 @@ import {
   Pressable,
   StyleSheet,
   TouchableOpacity,
-  Modal,
+  Dimensions,
+  TextInput,
+  FlatList,
 } from 'react-native';
 import styles from './styles';
 import navigationStrings from '../../constants/navigationStrings';
@@ -14,6 +16,10 @@ import {SelectList} from 'react-native-dropdown-select-list';
 import {Calendar} from 'react-native-calendars';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Modal from 'react-native-modal';
+import allCities from '../../../src/cities.json'
+
+const {width, height} = Dimensions.get("window")
 
 const Home = ({navigation}) => {
   function valuesFunc() {
@@ -32,18 +38,55 @@ const Home = ({navigation}) => {
 
   
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [nereden, setNereden] = React.useState('');
   const [nereye, setNereye] = React.useState('');
 
   const categories = [
-    {key: 'bursa', value: 'Bursa'},
-    {key: 'izmir', value: 'Izmir'},
-    {key: 'istanbul', value: 'Istanbul'},
-    {key: 'balikesir', value: 'Balikesir'},
-    {key: 'ankara', value: 'Ankara'},
-    {key: 'cesme', value: 'Cesme'},
+    {id: '0', value: 'İstanbul Avrupa'},
+    {id: '1', value: 'İstanbul Anadolu'},
+    {id: '2', value: 'Ankara'},
+    {id: '3', value: 'İzmir'},
+    {id: '4', value: 'Adana'},
+    {id: '5', value: 'Bursa'},
+    {id: '6', value: 'Antalya'},
+    {id: '7', value: 'Eskişehir'},
+    {id: '8', value: 'Konya'},
+    {id: '9', value: 'Mersin'},
   ];
+
+
+  const cities = categories;
+
+  const renderCities = ({item}) => {
+    return(
+      <TouchableOpacity style={{padding:10, borderBottomWidth:1}} onPress={() => console.log(item.value)}>
+        <Text style={{color:'black', fontSize:12, fontWeight:'bold'}}>{item.value}</Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const digerDuraklar = () => {
+    return(
+      <View>
+        <View style={{backgroundColor:'lightgray', padding:5}}>
+          <Text style={{color:'black', fontSize:12}}>Diğer Duraklar</Text>
+          </View>
+      <FlatList data={allCities["cities"]} renderItem={renderCities} />
+      </View>
+    )
+  }
+  const enCokKullanilanDuraklar = () => {
+    return(
+      <View>
+        <View style={{backgroundColor:'lightgray', padding:5}}>
+          <Text style={{color:'black', fontSize:12}}>En Çok Kullanılan Duraklar</Text>
+          </View>
+      <FlatList data={cities} renderItem={renderCities} />
+      </View>
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -115,14 +158,20 @@ const Home = ({navigation}) => {
             }}>
             NEREDEN
           </Text>
-          <SelectList
+          <TouchableOpacity style={{marginLeft:15}} onPress={() => setIsModalVisible(true) }>
+              <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>Ankara</Text>
+          </TouchableOpacity>
+
+          <View style={{height:0.8, width:"90%",borderTopColor:"gray", borderTopWidth:1, marginHorizontal:10}} />
+          
+          {/* <SelectList
             boxStyles={{margin: 10}}
             dropdownStyles={{margin: 10}}
             setSelected={val => setNereden(val)}
             data={categories}
             placeholder={'Nereden'}
             search={true}
-          />
+          /> */}
           <Text
             style={{
               marginStart: 15,
@@ -132,14 +181,19 @@ const Home = ({navigation}) => {
             }}>
             NEREYE
           </Text>
-          <SelectList
+
+          <TouchableOpacity style={{marginLeft:15}} onPress={() => setShowModal(true)}>
+            <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>İstanbul</Text>
+          </TouchableOpacity>
+
+          {/* <SelectList
             boxStyles={{margin: 10}}
             dropdownStyles={{margin: 10}}
             setSelected={val1 => setNereye(val1)}
             data={categories}
             placeholder={'Nereye'}
             search={true}
-          />
+          /> */}
         </View>
         <View style={styles.card}>
           <Text
@@ -158,6 +212,10 @@ const Home = ({navigation}) => {
             onPress={() => setShowModal(true)}>
             <Text style={{fontSize: 22, color: 'white'}}>Tarih Sec</Text>
           </TouchableOpacity>
+
+          
+          
+{/*           
           <Modal visible={showModal} animationType="fade">
             <Calendar
               style={{borderRadius: 10, elevation: 4, margin: 40}}
@@ -166,7 +224,8 @@ const Home = ({navigation}) => {
                 setShowModal(false); //
               }}
             />
-          </Modal>
+          </Modal> */}
+
           <View style={styles.calendarButton}>
             <Pressable
               style={styles.today}
@@ -199,6 +258,38 @@ const Home = ({navigation}) => {
           Kesintisiz Iade Hakki ve 0 Komisyon
         </Text>
       </View>
+
+      <Modal 
+        isVisible={isModalVisible} 
+        onBackButtonPress={() => setIsModalVisible(!isModalVisible)}
+        onBackdropPress={() => setIsModalVisible(!isModalVisible)}
+        statusBarTranslucent={false}
+        animationType="fade"
+        transparent={false}
+        style={{width:"100%", height:"100%", backgroundColor:'green', margin:0, justifyContent:'flex-start'}}
+
+      >
+        <View style={{backgroundColor:'#bb1111', flex:1}}>
+          <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <Text style={{color:'white',fontSize:11, fontWeight:'600',marginLeft:15, marginTop:10}}>NEREDEN</Text>
+            <TouchableOpacity onPress={() => setIsModalVisible(!isModalVisible)}>
+              <MaterialCommunityIcons
+              name="close"
+              style={{color: 'white', fontSize: 26,marginTop:10, marginRight:6}}></MaterialCommunityIcons>
+              </TouchableOpacity> 
+            </View>
+          <View style={{backgroundColor:'white',flexDirection:'row',justifyContent:'space-between',alignItems:'center', margin:15, padding:0,borderRadius:4}}>
+
+          <TextInput placeholder='İl veya ilçe adı yazın' style={{flex:1,borderRadius:5, padding:5, paddingLeft:15}} />
+          <MaterialCommunityIcons
+              name="magnify"
+              style={{color: 'gray', fontSize: 21, marginTop:3, marginRight:6}}></MaterialCommunityIcons>
+
+          </View>
+          <FlatList ListHeaderComponent={enCokKullanilanDuraklar} ListFooterComponent={digerDuraklar} style={{backgroundColor:'white', flex:1}} />
+        </View>
+      </Modal>
+
     </View>
   );
 };
