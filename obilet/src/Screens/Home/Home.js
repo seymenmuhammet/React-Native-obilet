@@ -23,15 +23,15 @@ const {width, height} = Dimensions.get("window")
 
 const Home = ({navigation}) => {
   function valuesFunc() {
-    const values = {
-      userName: text,
-      userTc: number,
-      userNereden: nereden,
-      userNereye: nereye,
-      userRota: value,
+    const values = { userInfo: [
+        {"userName": "admin"},
+        {"userTC": "20030042341"},
+        {"nereden": nereden},
+        {"nereye": nereye},
+        {"gidis":gidisTarihiWithDots}
+      ]
     };
-    console.log(nereden);
-    navigation.navigate(navigationStrings.PROFILE, {values});
+    // navigation.navigate(navigationStrings.PROFILE, {values});
 
     console.log(values);
   }
@@ -42,8 +42,9 @@ const Home = ({navigation}) => {
   
   const [showTarihModal, setShowTarihModal] = useState(false);
   const [nereden, setNereden] = useState('Ankara');
-  const [nereye, setNereye] = useState('Bursa');
+  const [nereye, setNereye] = useState('İstanbul');
   const [gidisTarihi, setGidisTarihi] = useState("Gidiş Tarihi Seçiniz");
+  const [gidisTarihiWithDots, setGidisTarihiWithDots] = useState("");
 
   const categories = [
     {id: '0', value: 'İstanbul Avrupa'},
@@ -124,32 +125,39 @@ const Home = ({navigation}) => {
     const options = { month: 'long', weekday: 'long'  };
     const dateStringFormatted = date.toLocaleDateString('tr-TR', options);
     const dateAsString = day.day + " " +  dateStringFormatted
-    console.log(dateAsString);
+    const dateWithDots = `${("0" + day.day).slice(-2)}.${("0" + day.month).slice(-2)}.${day.year}`
+    setGidisTarihiWithDots(dateWithDots)
     setGidisTarihi(dateAsString)
     setShowTarihModal(false)
   };
 
 
   const handleTodaysDate = () => {
-    const day = new Date().getDay()
-    const month = new Date().getMonth()
-    const year = new Date().getFullYear()
+    const myDate = new Date()
+    const day = myDate.getDay()
+    const month = myDate.getMonth()
+    const month1 = myDate.getMonth() + 1 //0'dan basladigi icin
+    const year = myDate.getFullYear()
     const date = new Date(year, month, day);
     const options = { month: 'long', weekday: 'long'  };
     const dateFormatted = day + " " + date.toLocaleDateString("tr-TR", options)
+    const unformattedDate = `${("0" + day).slice(-2)}.${("0" + month1).slice(-2)}.${year}` 
+    setGidisTarihiWithDots(unformattedDate)
     setGidisTarihi(dateFormatted)
-    console.log(dateFormatted)
   };
 
   const handleTomorrowsDate = () => {
-    const day = new Date().getDay() + 1
-    const month = new Date().getMonth()
-    const year = new Date().getFullYear()
+    const myDate = new Date()
+    const day = myDate.getDay() + 1 //tomorrow
+    const month = myDate.getMonth()
+    const month1 = myDate.getMonth() + 1  //0'dan basladigi icin
+    const year = myDate.getFullYear()
     const date = new Date(year, month, day);
     const options = { month: 'long', weekday: 'long'  };
     const dateFormatted = day + " " + date.toLocaleDateString("tr-TR", options)
+    const unformattedDate = `${("0" + day).slice(-2)}.${("0" + month1).slice(-2)}.${year}` 
+    setGidisTarihiWithDots(unformattedDate)
     setGidisTarihi(dateFormatted)
-    console.log(dateFormatted)
   };
 
   // _____  _   _  _______  ______  _____   ______             _____  ______ 
