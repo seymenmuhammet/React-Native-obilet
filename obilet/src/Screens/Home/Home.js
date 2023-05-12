@@ -130,16 +130,26 @@ const Home = ({navigation}) => {
   };
 
 
+  const handleTodaysDate = () => {
+    const day = new Date().getDay()
+    const month = new Date().getMonth()
+    const year = new Date().getFullYear()
+    const date = new Date(year, month, day);
+    const options = { month: 'long', weekday: 'long'  };
+    const dateFormatted = day + " " + date.toLocaleDateString("tr-TR", options)
+    setGidisTarihi(dateFormatted)
+    console.log(dateFormatted)
+  };
+
   const handleTomorrowsDate = () => {
-    // const day = new Date().toDateString()
-    // const dateString = day.dateString;
-    // const date = new Date(dateString);
-    // const options = { month: 'long', weekday: 'long'  };
-    // const dateStringFormatted = date.toLocaleDateString('tr-TR', options);
-    // const dateAsString = day.day + " " +  dateStringFormatted
-    // console.log(dateAsString);
-    // setGidisTarihi(dateAsString)
-    // setShowTarihModal(false)
+    const day = new Date().getDay() + 1
+    const month = new Date().getMonth()
+    const year = new Date().getFullYear()
+    const date = new Date(year, month, day);
+    const options = { month: 'long', weekday: 'long'  };
+    const dateFormatted = day + " " + date.toLocaleDateString("tr-TR", options)
+    setGidisTarihi(dateFormatted)
+    console.log(dateFormatted)
   };
 
   // _____  _   _  _______  ______  _____   ______             _____  ______ 
@@ -244,9 +254,7 @@ const Home = ({navigation}) => {
             <Pressable
               style={styles.today}
               title="Bugün"
-              onPress={() => {
-                console.log('Bugün');
-              }}>
+              onPress={handleTodaysDate}>
               <Text style={{fontSize: 15, margin: 6,textAlign:'center'}}>Bugün</Text>
             </Pressable>
 
