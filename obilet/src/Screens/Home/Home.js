@@ -1,10 +1,8 @@
-import React, {useState, Component} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
-  Button,
   Pressable,
-  StyleSheet,
   TouchableOpacity,
   Dimensions,
   TextInput,
@@ -17,58 +15,49 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
 import allCities from '../../../src/cities.json'
-import { format } from 'date-fns'
+import topCities from '../../../src/topCities.json'
 
 const {width, height} = Dimensions.get("window")
 
 const Home = ({navigation}) => {
-  function valuesFunc() {
-    const values = { userInfo: [
-        {"userName": "admin"},
-        {"userTC": "20030042341"},
-        {"nereden": nereden},
-        {"nereye": nereye},
-        {"gidis":gidisTarihiWithDots}
-      ]
-    };
-    // navigation.navigate(navigationStrings.PROFILE, {values});
 
-    console.log(values);
-  }
   
-
+  /* +++++++++++++++++++++++ USESTATE VALUES START +++++++++++++++++++++++ */
   const [showNeredenModal, setShowNeredenModal] = useState(false);
   const [showNereyeModal, setShowNereyeModal] = useState(false);
-  
   const [showTarihModal, setShowTarihModal] = useState(false);
   const [nereden, setNereden] = useState('Ankara');
   const [nereye, setNereye] = useState('İstanbul');
   const [gidisTarihi, setGidisTarihi] = useState("Gidiş Tarihi Seçiniz");
   const [gidisTarihiWithDots, setGidisTarihiWithDots] = useState("");
+  /* +++++++++++++++++++++++ USESTATE VALUES END +++++++++++++++++++++++ */
+  
+  /* -------------------------- INFO VALUES FUNCTION START -------------------------- */
+  function valuesFunc() {
+    const values = { userInfo: [
+      {"userName": "admin"},
+      {"userTC": "20030042341"},
+      {"nereden": nereden},
+      {"nereye": nereye},
+      {"gidisTarihi":gidisTarihiWithDots}
+    ]
+  };
+  // navigation.navigate(navigationStrings.PROFILE, {values});
+  console.log(values);
+}
+/* -------------------------- INFO VALUES FUNCTION END -------------------------- */
 
-  const categories = [
-    {id: '0', value: 'İstanbul Avrupa'},
-    {id: '1', value: 'İstanbul Anadolu'},
-    {id: '2', value: 'Ankara'},
-    {id: '3', value: 'İzmir'},
-    {id: '4', value: 'Adana'},
-    {id: '5', value: 'Bursa'},
-    {id: '6', value: 'Antalya'},
-    {id: '7', value: 'Eskişehir'},
-    {id: '8', value: 'Konya'},
-    {id: '9', value: 'Mersin'},
-  ];
-
-
-  const cities = categories;
-
-  const renderCities = ({item}) => {
+  /* ******************* RENDER NEREDEN START ******************* */
+  const renderCitiesNereden = ({item}) => {
     return(
-      <TouchableOpacity style={{padding:10, borderBottomWidth:1}} onPress={() => {setNereden(item.value);setShowNeredenModal(!showNeredenModal);console.log(item.value)} } >
-        <Text style={{color:'black', fontSize:12, fontWeight:'bold'}}>{item.value}</Text>
-      </TouchableOpacity>
+    <TouchableOpacity style={{padding:10, borderBottomWidth:1}} onPress={() => {setNereden(item.value);setShowNeredenModal(!showNeredenModal);console.log(item.value)} } >
+    <Text style={{color:'black', fontSize:12, fontWeight:'bold'}}>{item.value}</Text>
+  </TouchableOpacity>
     )
   }
+  /* ******************* RENDER NEREDEN END ******************* */
+  
+  /* -------------------------- RENDER NEREYE START -------------------------- */
   const renderCitiesNereye = ({item}) => {
     return(
       <TouchableOpacity style={{padding:10, borderBottomWidth:1}} onPress={() => {setNereye(item.value);setShowNereyeModal(!showNereyeModal);console.log(item.value)} } >
@@ -76,50 +65,49 @@ const Home = ({navigation}) => {
       </TouchableOpacity>
     )
   }
+  /* -------------------------- RENDER NEREYE END -------------------------- */
 
-  const digerDuraklar = () => {
+  
+  /* ++++++++++++++++++++++++ DIGER DURAKLAR START ++++++++++++++++++++++++ */
+  const digerDuraklar = (nereden) => {
+    console.log("\n NEREDEN diger?: ", nereden)
     return(
       <View>
         <View style={{backgroundColor:'lightgray', padding:5}}>
           <Text style={{color:'black', fontSize:12}}>Diğer Duraklar</Text>
           </View>
-      <FlatList data={allCities["cities"]} renderItem={renderCities} />
+      {nereden ? 
+        <FlatList data={allCities["cities"]} renderItem={renderCitiesNereden} />
+        : 
+        <FlatList data={allCities["cities"]} renderItem={renderCitiesNereye} />
+      }
       </View>
     )
   }
-  const enCokKullanilanDuraklar = () => {
+  /* ++++++++++++++++++++++++ DIGER DURAKLAR END ++++++++++++++++++++++++ */
+
+
+  /* -------------------------- EN COK KULLANILAN DURAKLAR START -------------------------- */
+  const enCokKullanilanDuraklar = (nereden) => {
+    console.log("\n NEREDEN encok?: ", nereden)
     return(
       <View>
         <View style={{backgroundColor:'lightgray', padding:5}}>
           <Text style={{color:'black', fontSize:12}}>En Çok Kullanılan Duraklar</Text>
           </View>
-      <FlatList data={cities} renderItem={renderCities} />
-      </View>
-    )
-  }
-  const digerDuraklarNereye = () => {
-    return(
-      <View>
-        <View style={{backgroundColor:'lightgray', padding:5}}>
-          <Text style={{color:'black', fontSize:12}}>Diğer Duraklar</Text>
-          </View>
-      <FlatList data={allCities["cities"]} renderItem={renderCitiesNereye} />
-      </View>
-    )
-  }
-  const enCokKullanilanDuraklarNereye = () => {
-    return(
-      <View>
-        <View style={{backgroundColor:'lightgray', padding:5}}>
-          <Text style={{color:'black', fontSize:12}}>En Çok Kullanılan Duraklar</Text>
-          </View>
-      <FlatList data={cities} renderItem={renderCitiesNereye} />
+      {nereden?
+      <FlatList data={topCities['cities']} renderItem={renderCitiesNereden} />
+      :
+      <FlatList data={topCities['cities']} renderItem={renderCitiesNereye} />
+      }
       </View>
     )
   }
 
+/* -------------------------- EN COK KULLANILAN DURAKLAR END -------------------------- */
 
-  const handleDayPress = (day) => {
+
+  const handleCalendarDate = (day) => {
     const dateString = day.dateString;
     const date = new Date(dateString);
     const options = { month: 'long', weekday: 'long'  };
@@ -132,11 +120,11 @@ const Home = ({navigation}) => {
   };
 
 
-  const handleTodaysDate = () => {
+  const handleDate = (tomorrow) => {
     const myDate = new Date()
-    const day = myDate.getDay()
+    const day = myDate.getDay() + tomorrow
     const month = myDate.getMonth()
-    const month1 = myDate.getMonth() + 1 //0'dan basladigi icin
+    const month1 = myDate.getMonth() + 1 
     const year = myDate.getFullYear()
     const date = new Date(year, month, day);
     const options = { month: 'long', weekday: 'long'  };
@@ -146,19 +134,6 @@ const Home = ({navigation}) => {
     setGidisTarihi(dateFormatted)
   };
 
-  const handleTomorrowsDate = () => {
-    const myDate = new Date()
-    const day = myDate.getDay() + 1 //tomorrow
-    const month = myDate.getMonth()
-    const month1 = myDate.getMonth() + 1  //0'dan basladigi icin
-    const year = myDate.getFullYear()
-    const date = new Date(year, month, day);
-    const options = { month: 'long', weekday: 'long'  };
-    const dateFormatted = day + " " + date.toLocaleDateString("tr-TR", options)
-    const unformattedDate = `${("0" + day).slice(-2)}.${("0" + month1).slice(-2)}.${year}` 
-    setGidisTarihiWithDots(unformattedDate)
-    setGidisTarihi(dateFormatted)
-  };
 
   // _____  _   _  _______  ______  _____   ______             _____  ______ 
   // |_   _|| \ | ||__   __||  ____||  __ \ |  ____|    /\     / ____||  ____|
@@ -262,14 +237,14 @@ const Home = ({navigation}) => {
             <Pressable
               style={styles.today}
               title="Bugün"
-              onPress={handleTodaysDate}>
+              onPress={() => handleDate(parseInt("0"))}>
               <Text style={{fontSize: 15, margin: 6,textAlign:'center'}}>Bugün</Text>
             </Pressable>
 
             <Pressable
               style={styles.tomorrow}
               title="Yarın"
-              onPress={handleTomorrowsDate}>
+              onPress={() => handleDate(parseInt("1"))}>
               <Text style={{fontSize: 15, margin: 6,textAlign:'center', color:'white',}}>Yarın</Text>
             </Pressable>
             
@@ -324,7 +299,7 @@ const Home = ({navigation}) => {
           <View>
             <Calendar
               style={{borderRadius: 10, elevation: 4, margin: 0}}
-              onDayPress={handleDayPress}
+              onDayPress={handleCalendarDate}
             />
           </View>
         </View>
@@ -359,7 +334,7 @@ const Home = ({navigation}) => {
               style={{color: 'gray', fontSize: 21, marginTop:3, marginRight:6}}></MaterialCommunityIcons>
 
           </View>
-          <FlatList ListHeaderComponent={enCokKullanilanDuraklar} ListFooterComponent={digerDuraklar} style={{backgroundColor:'white', flex:1}} />
+          <FlatList ListHeaderComponent={() => enCokKullanilanDuraklar(parseInt("1"))} ListFooterComponent={() => digerDuraklar(parseInt("1"))} style={{backgroundColor:'white', flex:1}} />
         </View>
       </Modal>
 {/* ******************* NEREDEN MODAL END ******************* */}
@@ -393,7 +368,7 @@ const Home = ({navigation}) => {
               style={{color: 'gray', fontSize: 21, marginTop:3, marginRight:6}}></MaterialCommunityIcons>
 
           </View>
-          <FlatList ListHeaderComponent={enCokKullanilanDuraklarNereye} ListFooterComponent={digerDuraklarNereye} style={{backgroundColor:'white', flex:1}} />
+          <FlatList ListHeaderComponent={() => enCokKullanilanDuraklar(parseInt("0"))} ListFooterComponent={() => digerDuraklar(parseInt("0"))} style={{backgroundColor:'white', flex:1}} />
         </View>
       </Modal>
 {/* ******************* NEREYE MODAL END ******************* */}

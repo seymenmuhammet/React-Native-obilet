@@ -1,0 +1,13 @@
+{ "cities": [
+    {"id": "0", "value": "İstanbul Avrupa"},
+    {"id": "1", "value": "İstanbul Anadolu"},
+    {"id": "2", "value": "Ankara"},
+    {"id": "3", "value": "İzmir"},
+    {"id": "4", "value": "Adana"},
+    {"id": "5", "value": "Bursa"},
+    {"id": "6", "value": "Antalya"},
+    {"id": "7", "value": "Eskişehir"},
+    {"id": "8", "value": "Konya"},
+    {"id": "9", "value": "Mersin"}
+  ]
+}
