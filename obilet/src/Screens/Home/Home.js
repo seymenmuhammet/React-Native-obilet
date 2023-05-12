@@ -17,6 +17,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
 import allCities from '../../../src/cities.json'
+import { format } from 'date-fns'
 
 const {width, height} = Dimensions.get("window")
 
@@ -34,15 +35,15 @@ const Home = ({navigation}) => {
 
     console.log(values);
   }
-
   
 
   const [showNeredenModal, setShowNeredenModal] = useState(false);
   const [showNereyeModal, setShowNereyeModal] = useState(false);
   
-  const [showModal, setShowModal] = React.useState(false);
-  const [nereden, setNereden] = React.useState('Ankara');
-  const [nereye, setNereye] = React.useState('Bursa');
+  const [showTarihModal, setShowTarihModal] = useState(false);
+  const [nereden, setNereden] = useState('Ankara');
+  const [nereye, setNereye] = useState('Bursa');
+  const [gidisTarihi, setGidisTarihi] = useState("Gidiş Tarihi Seçiniz");
 
   const categories = [
     {id: '0', value: 'İstanbul Avrupa'},
@@ -116,32 +117,58 @@ const Home = ({navigation}) => {
     )
   }
 
+
+  const handleDayPress = (day) => {
+    const dateString = day.dateString;
+    const date = new Date(dateString);
+    const options = { month: 'long', weekday: 'long'  };
+    const dateStringFormatted = date.toLocaleDateString('tr-TR', options);
+    const dateAsString = day.day + " " +  dateStringFormatted
+    console.log(dateAsString);
+    setGidisTarihi(dateAsString)
+    setShowTarihModal(false)
+  };
+
+
+  const handleTomorrowsDate = () => {
+    // const day = new Date().toDateString()
+    // const dateString = day.dateString;
+    // const date = new Date(dateString);
+    // const options = { month: 'long', weekday: 'long'  };
+    // const dateStringFormatted = date.toLocaleDateString('tr-TR', options);
+    // const dateAsString = day.day + " " +  dateStringFormatted
+    // console.log(dateAsString);
+    // setGidisTarihi(dateAsString)
+    // setShowTarihModal(false)
+  };
+
+  // _____  _   _  _______  ______  _____   ______             _____  ______ 
+  // |_   _|| \ | ||__   __||  ____||  __ \ |  ____|    /\     / ____||  ____|
+  //   | |  |  \| |   | |   | |__   | |__) || |__      /  \   | |     | |__   
+  //   | |  | . ` |   | |   |  __|  |  _  / |  __|    / /\ \  | |     |  __|  
+  //  _| |_ | |\  |   | |   | |____ | | \ \ | |      / ____ \ | |____ | |____ 
+  // |_____||_| \_|   |_|   |______||_|  \_\|_|     /_/    \_\ \_____||______|
+
+
   return (
     <View style={styles.container}>
+
+{/* ******************* BANNER START ******************* */}
       <View style={styles.headerBack}>
         <Text style={styles.headerFirst}>biletara.</Text>
         <Text style={styles.headerSecond}>com</Text>
       </View>
+{/* ******************* BANNER END ******************* */}
+
+{/* ******************* BUTTONS START ******************* */}
       <View style={styles.buttons}>
         <TouchableOpacity style={styles.buttonsOpac}>
-          <Text>
-            <FontAwesome
-              name="bus"
-              style={{color: 'black', fontSize: 27}}></FontAwesome>
-          </Text>
-          <Text style={{fontSize: 15}}>Otobus</Text>
+          <Text> <FontAwesome name="bus" style={{color: 'black', fontSize: 27}}></FontAwesome> </Text>
+          <Text style={{fontSize: 15}}>Otobüs</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonsOpac}>
-          <Text>
-            <FontAwesome
-              name="plane"
-              style={{
-                color: 'black',
-                fontSize: 30,
-                marginRight: 20,
-              }}></FontAwesome>
-          </Text>
-          <Text style={{fontSize: 15}}>Ucak</Text>
+          <Text> <FontAwesome name="plane" style={{ color: 'black', fontSize: 30, marginRight: 20, }}></FontAwesome> </Text>
+          <Text style={{fontSize: 15}}>Uçak</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonsOpac}>
           <Text>
@@ -175,103 +202,118 @@ const Home = ({navigation}) => {
           <Text>Feribot</Text>
         </TouchableOpacity>
       </View>
+{/* ******************* BUTTONS END ******************* */}
+
+{/*****************
+****HOME START*****
+*****************/}
       <View style={styles.homeBack}>
+        
+{/* NEREDEN NEREYE CARD START */}
         <View style={styles.card}>
-          <Text
-            style={{
-              marginStart: 15,
-              marginTop: 5,
-              color: 'red',
-              fontWeight: 'bold',
-            }}>
-            NEREDEN
-          </Text>
+
+          <Text style={styles.neredenNereyeTitle}>NEREDEN</Text>
           <TouchableOpacity style={{marginLeft:15}} onPress={() => setShowNeredenModal(true) }>
-              <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>{nereden}</Text>
+              <Text style={styles.neredenNereyeSecimText}>{nereden}</Text>
           </TouchableOpacity>
 
-          <View style={{height:0.8, width:"90%",borderTopColor:"gray", borderTopWidth:1, marginHorizontal:10}} />
+          <View style={styles.neredenNereyeDivider} />
           
-          <Text
-            style={{
-              marginStart: 15,
-              marginTop: 5,
-              color: 'red',
-              fontWeight: 'bold',
-            }}>
-            NEREYE
-          </Text>
-
+          <Text style={styles.neredenNereyeTitle}>NEREYE</Text>
           <TouchableOpacity style={{marginLeft:15}} onPress={() => setShowNereyeModal(true)}>
-            <Text style={{fontWeight:'400', color:'black', marginVertical:8}}>{nereye}</Text>
+            <Text style={styles.neredenNereyeSecimText}>{nereye}</Text>
           </TouchableOpacity>
-
 
         </View>
+{/* NEREDEN NEREYE CARD END */}
+
+
+{/* GİDİŞ TARİHİ CARD START */}
         <View style={styles.card}>
-          <Text
-            style={{
-              borderBottomColor: 'gray',
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              margin: 10,
-            }}>
-            Gidis Tarihi:
-          </Text>
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'black',
-              alignItems: 'center',
-            }}
-            onPress={() => setShowModal(true)}>
-            <Text style={{fontSize: 22, color: 'white'}}>Tarih Seç</Text>
+
+            <Text style={styles.gidisTarihiTitle}> Gidis Tarihi: </Text>
+
+          <TouchableOpacity style={{}} onPress={() => setShowTarihModal(true)}>
+            <Text style={styles.gidisTarihiTextValue}>{gidisTarihi}</Text>
           </TouchableOpacity>
 
-          
-          
-{/*           
-      <Modal visible={showModal} animationType="fade">
-        <Calendar
-          style={{borderRadius: 10, elevation: 4, margin: 40}}
-          onDayPress={date => {
-            console.log(date);
-            setShowModal(false); //
-          }}
-        />
-      </Modal> 
-*/}
+          <View style={styles.gidisTarihiDivider} />
 
-          <View style={styles.calendarButton}>
+
+          <View style={styles.calendarButtons}>
             <Pressable
               style={styles.today}
               title="Bugün"
               onPress={() => {
                 console.log('Bugün');
               }}>
-              <Text style={{fontSize: 15, margin: 8}}>Bugün</Text>
+              <Text style={{fontSize: 15, margin: 6,textAlign:'center'}}>Bugün</Text>
             </Pressable>
+
             <Pressable
               style={styles.tomorrow}
               title="Yarın"
-              onPress={() => {
-                console.log('Yarın');
-              }}>
-              <Text style={{fontSize: 15, margin: 8}}>Yarın</Text>
+              onPress={handleTomorrowsDate}>
+              <Text style={{fontSize: 15, margin: 6,textAlign:'center', color:'white',}}>Yarın</Text>
             </Pressable>
+            
           </View>
-        </View>
-        <View style={styles.deneme}>
-          <Button
-            color={'#3EB489'}
-            onPress={valuesFunc}
-            title="Otobüs Bileti Bul"
-          />
-        </View>
-        <View></View>
 
-        <Text style={styles.navigationText}>
+        </View>
+{/* GİDİŞ TARİHİ CARD END */}
+        
+{/* ******************* BİLETBUL BUTTON START ******************* */}
+          <Pressable onPress={valuesFunc} style={styles.biletBulButton}>
+            <Text style={styles.biletBulButtonText}>
+              Otobüs Bileti Bul
+            </Text>
+          </Pressable>
+{/* ******************* BİLETBUL BUTTON END ******************* */}
+
+
+{/* ******************* FOOTER START ******************* */}
+        <Text style={styles.footerText}>
           Kesintisiz İade Hakkı ve 0 Komisyon
         </Text>
+{/* ******************* FOOTER END ******************* */}
+
+
       </View>
+
+{/*****************
+******HOME END*****
+*****************/}
+
+
+{/* ******************* TARİH MODAL START ******************* */}
+<Modal 
+        isVisible={showTarihModal} 
+        onBackButtonPress={() => setShowTarihModal(!showTarihModal)}
+        onBackdropPress={() => setShowTarihModal(!showTarihModal)}
+        statusBarTranslucent={true}
+        animationType="fade"
+        transparent={true}
+        style={{width:width, height:height/2, margin:0, justifyContent:'flex-end'}}
+      >
+        <View style={{width:width, height:height/2, backgroundColor:'white'}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center', paddingHorizontal:15, paddingVertical:10, backgroundColor:'#d33b38'}}>
+              <View style={{flexDirection:"row",alignItems:'center'}}>
+                <MaterialCommunityIcons name="calendar" style={{color: 'white', fontSize: 19}}></MaterialCommunityIcons>
+                <Text style={{color:"white", fontSize:14, fontWeight:'bold'}}> GİDİŞ TARİHİ</Text>
+                </View>
+              <TouchableOpacity onPress={() => setShowTarihModal(!showTarihModal)}>
+                <MaterialCommunityIcons name="close" style={{color: 'white', fontSize: 28}}></MaterialCommunityIcons>
+              </TouchableOpacity> 
+          </View>
+          <View>
+            <Calendar
+              style={{borderRadius: 10, elevation: 4, margin: 0}}
+              onDayPress={handleDayPress}
+            />
+          </View>
+        </View>
+      </Modal>
+{/* ******************* TARİH MODAL END ******************* */}
 
 {/* ******************* NEREDEN MODAL START ******************* */}
       <Modal 
@@ -341,7 +383,7 @@ const Home = ({navigation}) => {
 {/* ******************* NEREYE MODAL END ******************* */}
 
 
-    </View>
+    </View> //container
   );
 };
 export default Home;
