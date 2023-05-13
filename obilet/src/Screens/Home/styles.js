@@ -3,23 +3,23 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#FAFAFA',
   },
   headerBack: {
     flex: 1,
-    backgroundColor: '#FF2E2E',
+    backgroundColor: '#d33b38',
     justifyContent: 'center',
     flexDirection: 'row',
   },
   headerFirst: {
     marginTop: 20,
-    color: 'white',
+    color: '#FAFAFA',
     fontWeight: 'bold',
     fontSize: 35,
   },
   headerSecond: {
     marginTop: 20,
-    color: 'white',
+    color: '#FAFAFA',
     fontSize: 35,
   },
   buttons: {
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     marginStart: 30,
     marginEnd: 30,
     marginTop: -25,
+    paddingTop:8,
   },
   buttonsOpac: {
     justifyContent: 'center',
@@ -39,48 +40,20 @@ const styles = StyleSheet.create({
     width: 66,
     height: 50,
   },
-  cars: {
-    flex: 0.5,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderColor: 'gray',
-    borderWidth: 2,
-    backgroundColor: 'white',
-    borderRadius: 5,
-  },
-  carsButton: {
-    margin: 3,
-  },
   homeBack: {
     flex: 7,
-    backgroundColor: 'white',
+    backgroundColor: '#FAFAFA',
   },
   navigationBack: {
     flex: 1,
     backgroundColor: 'blue',
     margin: 5,
   },
-  navigationButton: {
-    margin: 10,
-  },
-  nav: {
-    flex: 1,
-    backgroundColor: 'red',
-  },
-  navigationText: {
+  footerText: {
     textAlign: 'center',
-    color: 'gray',
+    color: '#AFADAE',
     marginTop: 5,
-    fontWeight: 'bold',
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: 'black',
+    fontWeight: '600',
   },
   text: {
     fontSize: 16,
@@ -91,28 +64,93 @@ const styles = StyleSheet.create({
   },
   card: {
     borderWidth: 1,
-    borderColor: 'gray',
-    margin: 20,
+    borderColor: '#f0f0f0',
+    margin: 15,
+    marginBottom:10,
+    backgroundColor: 'white',
+    borderRadius: 5,
   },
-  calendarButton: {
+  calendarButtons: {
     flexDirection: 'row',
     marginBottom: 10,
     marginStart: 20,
-    backgroundColor: 'red',
   },
   today: {
     borderWidth: 1,
     width: 80,
+    borderRadius:8
   },
   tomorrow: {
     marginStart: 20,
-    borderWidth: 1,
     width: 80,
+    backgroundColor:'#d33b38',
+    borderRadius:8
   },
-  deneme: {
-    marginStart: 50,
-    marginEnd: 50,
+  neredenNereyeDivider: {
+    height: 0.8,
+    width: '90%',
+    borderTopColor: '#f0f0f0',
+    borderTopWidth: 1,
+    marginHorizontal: 10,
   },
+  neredenNereyeSecimText: {
+    fontWeight: '400',
+    color: 'black',
+    marginVertical: 8,
+  },
+  neredenNereyeTitle: {
+    marginStart: 15,
+    marginTop: 5,
+    color: '#d33b38',
+    fontWeight: 'bold',
+    letterSpacing:0.8
+  },
+  gidisTarihiTitle: {
+    margin: 10,
+  },
+  gidisTarihiTextValue: {
+    margin:10,
+    fontWeight:'400',
+    color:'black',
+    fontSize:20,
+
+  },
+  gidisTarihiDivider: {
+    height: 0.8,
+    width: '90%',
+    borderTopColor: '#f0f0f0',
+    borderTopWidth: 1,
+    margin:10
+  },
+  biletBulButtonContainer: {
+    flex:1,
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  biletBulButton: {
+    flex:1,
+    maxHeight:50,
+    width:"80%",
+    backgroundColor:'#0bb286',
+    borderRadius:8,
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center'
+  },
+  biletBulButtonText: {
+    color:'white',
+    textAlign:'center',
+    fontSize:18,
+    fontWeight:'bold'
+  },
+
+
+
+
+
+
+
 });
 
 export default styles;
