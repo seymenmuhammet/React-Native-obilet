@@ -231,59 +231,26 @@ const Home = ({navigation}) => {
 
       {/* ******************* BUTTONS START ******************* */}
       <View style={styles.buttons}>
-        <TouchableOpacity style={styles.buttonsOpac}>
-          <Text>
-            {' '}
-            <FontAwesome
-              name="bus"
-              style={{color: 'black', fontSize: 27}}></FontAwesome>{' '}
-          </Text>
-          <Text style={{fontSize: 15}}>Otobüs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonsOpac}>
-          <Text>
-            {' '}
-            <FontAwesome
-              name="plane"
-              style={{
-                color: 'black',
-                fontSize: 30,
-                marginRight: 20,
-              }}></FontAwesome>{' '}
-          </Text>
-          <Text style={{fontSize: 15}}>Uçak</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonsOpac}>
-          <Text>
-            <FontAwesome
-              name="hotel"
-              style={{color: 'black', fontSize: 30}}></FontAwesome>
-          </Text>
-          <Text>Otel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonsOpac}>
-          <Text>
-            <FontAwesome
-              name="car"
-              style={{color: 'black', fontSize: 30}}></FontAwesome>
-          </Text>
-          <Text>Arac</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'white',
-            width: 66,
-            height: 50,
-          }}>
-          <Text>
-            <MaterialCommunityIcons
-              name="ferry"
-              style={{color: 'black', fontSize: 30}}></MaterialCommunityIcons>
-          </Text>
-          <Text>Feribot</Text>
-        </TouchableOpacity>
+        {categes.map((item, key) => (
+          <TouchableOpacity
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'white',
+              width: 80,
+              height: 50,
+              marginEnd: 'auto',
+              backgroundColor: item.backgroundcolor,
+            }}
+            onPress={() => changeBackground(item)}>
+            <Text>
+              <FontAwesome
+                name={item.vehicle_name}
+                style={{color: 'black', fontSize: 27}}></FontAwesome>
+            </Text>
+            <Text style={{fontSize: 15, color: item.color}}>{item.name}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
       {/* ******************* BUTTONS END ******************* */}
 

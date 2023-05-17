@@ -29,9 +29,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     marginStart: 30,
-    marginEnd: 30,
+    marginEnd: 40,
     marginTop: -25,
-    paddingTop:8,
   },
   buttonsOpac: {
     justifyContent: 'center',
@@ -134,12 +133,6 @@ const styles = StyleSheet.create({
     fontSize:18,
     fontWeight:'bold'
   },
-
-
-
-
-
-
 
 });
 
