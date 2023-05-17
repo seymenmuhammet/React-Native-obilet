@@ -75,17 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginStart: 20,
   },
-  today: {
-    borderWidth: 1,
-    width: 80,
-    borderRadius:8
-  },
-  tomorrow: {
-    marginStart: 20,
-    width: 80,
-    backgroundColor:'#d33b38',
-    borderRadius:8
-  },
+  
   neredenNereyeDivider: {
     height: 0.8,
     width: '90%',
