@@ -70,6 +70,7 @@ function Routes() {
         <Tab.Screen name={navigationStrings.TRAVELS} component={Travels} options={{tabBarLabelStyle:{fontSize:14}}} />
         <Tab.Screen name={navigationStrings.HELP} component={Help} options={{tabBarLabelStyle:{fontSize:14}}} />
         <Tab.Screen name={navigationStrings.ACCOUNT} component={Account} options={{tabBarLabelStyle:{fontSize:14}}} />
+        <Tab.Screen name={navigationStrings.PROFILE} component={Profile} options={{tabBarLabelStyle:{fontSize:14}}} />
       </Tab.Navigator>
     </NavigationContainer>
   );

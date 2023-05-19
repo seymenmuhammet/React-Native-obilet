@@ -7,6 +7,7 @@ import {
   Dimensions,
   TextInput,
   FlatList,
+  StatusBar,
 } from 'react-native';
 import styles from './styles';
 import navigationStrings from '../../constants/navigationStrings';
@@ -83,15 +84,14 @@ const Home = ({navigation}) => {
   /* -------------------------- INFO VALUES FUNCTION START -------------------------- */
   function valuesFunc() {
     const values = {
-      userInfo: [
-        {userName: 'admin'},
-        {userTC: '20030042341'},
-        {nereden: nereden},
-        {nereye: nereye},
-        {gidisTarihi: gidisTarihiWithDots},
-      ],
+        "userName": 'Elon Musk',
+        "userTC": '20030042341',
+        "nereden": nereden,
+        "nereye": nereye,
+        "gidisTarihi": gidisTarihiWithDots,
+        "gidisTarihiString": gidisTarihi
     };
-    // navigation.navigate(navigationStrings.PROFILE, {values});
+    navigation.navigate(navigationStrings.PROFILE, {values});
     console.log(values);
   }
   /* -------------------------- INFO VALUES FUNCTION END -------------------------- */
@@ -222,6 +222,9 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+
+      <StatusBar backgroundColor="#d33b38" />
+
       {/* ******************* BANNER START ******************* */}
       <View style={styles.headerBack}>
         <Text style={styles.headerFirst}>biletara.</Text>

@@ -20,6 +20,7 @@
     "react-native": "^0.70.9",
     "react-native-calendars": "^1.1295.0",
     "react-native-dropdown-select-list": "^2.0.4",
+    "react-native-expandable-section-flatlist": "^1.2.2",
     "react-native-modal": "^13.0.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.20.0",
