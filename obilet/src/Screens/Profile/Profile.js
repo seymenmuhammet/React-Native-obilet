@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable, StatusBar} from 'react-native';
+import {View, Text, Pressable, StatusBar} from 'react-native';
 import styles from './styles';
 import navigationStrings from '../../constants/navigationStrings';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ButtonsBar from '../../components/ButtonsBar/ButtonsBar';
 
+const darkRed = "#d33b38"
 
 const Profile = ({navigation, route}) => {
 
@@ -27,63 +28,54 @@ const Profile = ({navigation, route}) => {
   }
   rota();
 
-  return(
+  return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={darkRed} />
 
-
-    <StatusBar backgroundColor="#d33b38" />
-      
       <View style={styles.fromToContainer}>
+        <Text style={styles.fromText}>{values.nereden}</Text>
+        <View style={styles.fromToIconContainer}>
+          <MaterialIcons
+            name="compare-arrows"
+            style={styles.fromToIcon}></MaterialIcons>
+        </View>
 
-          <Text style={styles.fromText}>{values.nereden}</Text>
-          <View style={styles.fromToIconContainer}>
-            <MaterialIcons
-                  name="compare-arrows"
-                  style={styles.fromToIcon}>
-            </MaterialIcons>
-            </View>
-          
-          <Text style={{color:'white',margin:8,fontSize:19}}>{values.nereye}</Text>
+        <Text style={styles.toText}>{values.nereye}</Text>
       </View>
-      
-      <View style={{flexDirection:'row',margin:10,justifyContent:'space-around',}}>
 
-{/* ÖNCEKİ BUTTON START */}
-        <Pressable style={{margin:5,borderWidth:1,paddingVertical:5,paddingHorizontal:20,borderRadius:8,borderColor:'white',width:"25%"}}>
-          <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
-          <Text style={{color:'white',padding:0,margin:0}}>&lt; Önceki</Text>
+      <View style={styles.changeDateNavbar}>
+        {/* ÖNCEKİ BUTTON START */}
+        <Pressable style={styles.navButtonContainer}>
+          <View style={styles.navButtonTextContainer}>
+            <Text style={styles.navButtonText}>&lt; Önceki</Text>
           </View>
-          </Pressable>
-{/* ÖNCEKİ BUTTON END */}
+        </Pressable>
+        {/* ÖNCEKİ BUTTON END */}
 
-{/* TARİH BUTTON START */}
-        <Pressable style={{flexDirection:'row',flex:1,margin:5,borderWidth:1,padding:5,borderRadius:8,borderColor:'white',alignItems:'center',justifyContent:'space-between',}}>
-        <MaterialCommunityIcons
-                  name="calendar-month-outline"
-                  style={{color: 'white', fontSize: 19,alignSelf:'center',}}>
-            </MaterialCommunityIcons>
-            <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
-              <Text style={{color:'white',}}>
-                {values.gidisTarihiString}
-              </Text>
-            </View>
-          </Pressable>
-{/* TARİH BUTTON END */}
-
-{/* SONRAKI BUTTON START */}
-        <Pressable style={{margin:5,borderWidth:1,paddingVertical:5,paddingHorizontal:20,borderRadius:8,borderColor:'white',width:"25%"}}>
-        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
-          <Text style={{color:'white',padding:0,margin:0}}>Sonraki &gt;</Text>
+        {/* TARİH BUTTON START */}
+        <Pressable
+          style={styles.datePickerContainer}>
+          <MaterialCommunityIcons name="calendar-month-outline" style={styles.datePickerIcon}></MaterialCommunityIcons>
+          <View
+            style={styles.datePickerTextContainer}>
+            <Text style={styles.gidisTarihiText}>{values.gidisTarihiString}</Text>
           </View>
-          </Pressable>
-        </View>
-{/* SONRAKI BUTTON END */}
-        
+        </Pressable>
+        {/* TARİH BUTTON END */}
 
-        <View style={{backgroundColor:'white',flexDirection:'row',padding:5}}>
-          <ButtonsBar />
-        </View>
+        {/* SONRAKI BUTTON START */}
+        <Pressable style={styles.navButtonContainer}>
+          <View style={styles.navButtonTextContainer}>
+            <Text style={styles.navButtonText}>Sonraki &gt;</Text>
+          </View>
+        </Pressable>
+      </View>
+      {/* SONRAKI BUTTON END */}
 
+      <View
+        style={styles.buttonsBarContainer}>
+        <ButtonsBar />
+      </View>
     </View>
   );
 };
