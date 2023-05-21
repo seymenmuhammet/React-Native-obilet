@@ -63,7 +63,7 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-#firatdmxFiles
+#firatdmx
 /run_android.bat
 /run_gitbash.bat
 /run_start_android.bat
