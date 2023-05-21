@@ -35,7 +35,7 @@ const Profile = ({navigation, route}) => {
       
       <View style={styles.fromToContainer}>
 
-          <Text style={styles.fromToText}>{values.nereden}</Text>
+          <Text style={styles.fromText}>{values.nereden}</Text>
           <View style={{borderWidth:1,borderColor:'white', borderRadius:5,padding:1}}>
             <MaterialIcons
                   name="compare-arrows"

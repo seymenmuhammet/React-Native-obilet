@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         flexDirection:'row',
     },
-    fromToText: {
+    fromText: {
         color:'white',
         margin:8,
         fontSize:19,
