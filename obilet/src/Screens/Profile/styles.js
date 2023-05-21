@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         flexDirection:'row',
     },
+    fromToText: {
+        color:'white',
+        margin:8,
+        fontSize:19,
+    },
 });
 
 export default styles;
