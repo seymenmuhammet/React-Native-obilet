@@ -36,10 +36,10 @@ const Profile = ({navigation, route}) => {
       <View style={styles.fromToContainer}>
 
           <Text style={styles.fromText}>{values.nereden}</Text>
-          <View style={{borderWidth:1,borderColor:'white', borderRadius:5,padding:1}}>
+          <View style={styles.fromToIconContainer}>
             <MaterialIcons
                   name="compare-arrows"
-                  style={{color: 'white', fontSize: 19,alignSelf:'center',}}>
+                  style={styles.fromToIcon}>
             </MaterialIcons>
             </View>
           

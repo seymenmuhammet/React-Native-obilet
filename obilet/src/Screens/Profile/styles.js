@@ -14,6 +14,17 @@ const styles = StyleSheet.create({
         margin:8,
         fontSize:19,
     },
+    fromToIconContainer: {
+        borderWidth:1,
+        borderColor:'white',
+        borderRadius:5,
+        padding:1,
+    },
+    fromToIcon: {
+        color: 'white',
+        fontSize: 19,
+        alignSelf:'center',
+    },
 });
 
 export default styles;
