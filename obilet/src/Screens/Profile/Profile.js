@@ -33,7 +33,7 @@ const Profile = ({navigation, route}) => {
 
     <StatusBar backgroundColor="#d33b38" />
       
-      <View style={{alignItems:'center',justifyContent:'center',flexDirection:'row',}}>
+      <View style={styles.fromToContainer}>
 
           <Text style={{color:'white',margin:8,fontSize:19}}>{values.nereden}</Text>
           <View style={{borderWidth:1,borderColor:'white', borderRadius:5,padding:1}}>
