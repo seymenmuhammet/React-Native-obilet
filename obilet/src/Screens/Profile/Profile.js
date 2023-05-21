@@ -28,7 +28,7 @@ const Profile = ({navigation, route}) => {
   rota();
 
   return(
-    <View style={{backgroundColor:'#d33b38'}}>
+    <View style={styles.container}>
 
 
     <StatusBar backgroundColor="#d33b38" />
