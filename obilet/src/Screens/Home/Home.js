@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import {
   Text,
   View,
@@ -212,6 +212,8 @@ const Home = ({navigation}) => {
     setGidisTarihiWithDots(unformattedDate);
     setGidisTarihi(dateFormatted);
   };
+
+
 
   // _____  _   _  _______  ______  _____   ______             _____  ______
   // |_   _|| \ | ||__   __||  ____||  __ \ |  ____|    /\     / ____||  ____|
