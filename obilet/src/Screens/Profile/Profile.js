@@ -1,21 +1,14 @@
-import React, {Component, useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Pressable,FlatList, Alert, Dimensions, StatusBar} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, Pressable, StatusBar} from 'react-native';
 import styles from './styles';
 import navigationStrings from '../../constants/navigationStrings';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import SliderButton from '../../components/buttons/SliderButton/SliderButton';
-import SiralaButton from '../../components/buttons/SiralaButton/SiralaButton';
-import Modal from 'react-native-modal';
+import ButtonsBar from '../../components/ButtonsBar/ButtonsBar';
 
-const {width, height} = Dimensions.get('window');
 
 const Profile = ({navigation, route}) => {
-  const [showFiltreModal, setShowFiltreModal] = useState(false)
-  const [visible, setVisible] = useState(true)
-  const [sirala, setSirala] = useState(false)
 
-  const buttonsData = ["FİLTRE","2+1", "Sabaha Karşı", "Sabah","Öğle","Akşam","Bağlayan Gece"]
   const {title} = route.params;
   const {values} = route.params;
   console.log("VALUES: ", values)
@@ -33,22 +26,6 @@ const Profile = ({navigation, route}) => {
     navigation.navigate(navigationStrings.EXPLORE, {});
   }
   rota();
-
-  const renderButtons = ({item}) => {
-    setVisible(true)
-    let themeVal= "secondary"
-    let icon= ""
-    let clickFunc = () => Alert.alert("Butona Basıldı", item)
-
-    if (item === "FİLTRE") {
-      themeVal = "primary"
-      icon = "filter"
-      clickFunc = () => setShowFiltreModal(!showFiltreModal)
-    }
-    return(
-      <SliderButton icon={icon} press={clickFunc} theme={themeVal} textString={item} style={{margin:10, borderWidth:1,padding:10,borderRadius:10}} />
-    )
-  }
 
   return(
     <View style={{backgroundColor:'#d33b38'}}>
@@ -104,63 +81,8 @@ const Profile = ({navigation, route}) => {
         
 
         <View style={{backgroundColor:'white',flexDirection:'row',padding:5}}>
-          <FlatList horizontal data={buttonsData} ListHeaderComponent={SiralaButton} renderItem={renderButtons} />
+          <ButtonsBar />
         </View>
-
-{/* FİLTRE MODAL START */}
-        <Modal
-        isVisible={showFiltreModal}
-        onBackButtonPress={() => setShowFiltreModal(!showFiltreModal)}
-        onBackdropPress={() => setShowFiltreModal(!showFiltreModal)}
-        statusBarTranslucent={true}
-        animationType="fade"
-        transparent={true}
-        style={{
-          width: width,
-          height: (height / 3) * 2,
-          margin: 0,
-          justifyContent: 'flex-end',
-        }}>
-        <View
-          style={{width: width, height: (height / 3) * 2, backgroundColor: 'white'}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingHorizontal: 15,
-              paddingVertical: 10,
-              backgroundColor: '#d33b38',
-            }}>
-              <Pressable style={{flexDirection:'row'}} onPress={()=> Alert.alert("SIFIRLA Basıldı")}>
-              <MaterialCommunityIcons
-                name="rotate-3d-variant"
-                style={{color: 'white', fontSize: 19}}></MaterialCommunityIcons>
-                <Text style={{color:'white', fontSize:15,fontWeight:'bold'}}> SIFIRLA</Text>
-              </Pressable>
-            <View style={{flexDirection: 'row', alignItems: 'center',marginLeft:-10}}>
-              <MaterialCommunityIcons
-                name="filter"
-                style={{color: 'white', fontSize: 19}}></MaterialCommunityIcons>
-              <Text style={{color: 'white', fontSize: 14, fontWeight: 'bold'}}>
-                {' '}
-                FİLTRE
-              </Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => setShowFiltreModal(!showFiltreModal)}>
-              <MaterialCommunityIcons
-                name="close"
-                style={{color: 'white', fontSize: 28}}></MaterialCommunityIcons>
-            </TouchableOpacity>
-          </View>
-          <View style={{padding:15}}>
-            <Text style={{fontWeight:'bold',fontSize:35}}>FİLTRE ÖZELLİKLERİ BURAYA GELECEK</Text>
-          </View>
-        </View>
-      </Modal>
-        {/* FİLTRE MODAL END */}
-
 
     </View>
   );

@@ -15,8 +15,8 @@ import {Calendar} from 'react-native-calendars';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
-import allCities from '../../../src/cities.json';
-import topCities from '../../../src/topCities.json';
+import allCities from '../../cities.json';
+import topCities from '../../topCities.json';
 
 const {width, height} = Dimensions.get('window');
 
