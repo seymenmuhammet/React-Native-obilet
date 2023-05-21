@@ -1,6 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
+const darkRedColor = "#d33b38"
 
 export default styles = StyleSheet.create({
     // MODAL START
@@ -21,7 +22,7 @@ export default styles = StyleSheet.create({
               alignItems: 'center',
               paddingHorizontal: 15,
               paddingVertical: 10,
-              backgroundColor: '#d33b38',
+              backgroundColor: darkRedColor,
     },
     clearButton: {
         flexDirection:'row',
