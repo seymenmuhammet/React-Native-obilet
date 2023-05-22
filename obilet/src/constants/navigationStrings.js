@@ -1,6 +1,6 @@
 export default {
     HOME: "Ara",
-    PROFILE: "Profile",
+    PROFILE: "Bilet",
     EXPLORE: "Explore",
     TRAVELS: "Seyehatlerim",
     HELP: "Yardım",

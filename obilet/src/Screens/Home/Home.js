@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -15,8 +15,8 @@ import {Calendar} from 'react-native-calendars';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
-import allCities from '../../cities.json';
-import topCities from '../../topCities.json';
+import allCities from '../../../src/cities.json';
+import topCities from '../../../src/topCities.json';
 
 const {width, height} = Dimensions.get('window');
 
@@ -212,8 +212,6 @@ const Home = ({navigation}) => {
     setGidisTarihiWithDots(unformattedDate);
     setGidisTarihi(dateFormatted);
   };
-
-
 
   // _____  _   _  _______  ______  _____   ______             _____  ______
   // |_   _|| \ | ||__   __||  ____||  __ \ |  ____|    /\     / ____||  ____|
